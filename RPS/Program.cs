@@ -1,4 +1,6 @@
 ﻿using System;
+using GameItem;
+using GameStatus;
 
 namespace RPS
 {
@@ -23,20 +25,27 @@ namespace RPS
 
         private static int RockPaperScissors(string player1, string player2)
         {
-            int tempRes;
+            player1 = player1.ToLower();
+            player2 = player2.ToLower();
+            int tempRes = 0;
             if (player1 == player2)
             {
-                tempRes = 0; // Draw
+                tempRes = (int)Status.Draw; // Draw
             }
-            if (((player1 == "Rock") && (player2 == "Scissors")) ||
-                ((player1 == "Scissors") && (player2 == "Paper")) ||
-                ((player1 == "Paper") && (player2 == "Rock")))
+            else if (((player1 == Items.Rock.ToString().ToLower())
+                && (player2 == Items.Scissors.ToString().ToLower())) ||
+
+                ((player1 == Items.Scissors.ToString().ToLower())
+                && (player2 == Items.Paper.ToString().ToLower())) ||
+
+                ((player1 == Items.Paper.ToString().ToLower())
+                && (player2 == Items.Rock.ToString().ToLower())))
             {
-                tempRes = 1; // Player 1 wins
+                tempRes = (int)Status.Player1Wins; // Player 1 wins
             }
             else
             {
-                tempRes = 2; // Player 2 wins
+                tempRes = (int)Status.Player2Wins; // Player 2 wins
             }
             return tempRes;
         }
